@@ -1,1 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/blueships.png","C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/bin/Windows/Content/blueships.xnb","TextureProcessor","Texture2DContent",10750,150565,0.1294263
+"C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/kenvector.spritefont","C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/bin/Windows/Content/kenvector.xnb","FontDescriptionProcessor","SpriteFontContent",2019,136226,0.2071339
+"C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/space.png","C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/bin/Windows/Content/space.xnb","TextureProcessor","Texture2DContent",2485,262229,0.1481176
