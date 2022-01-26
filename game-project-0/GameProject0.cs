@@ -12,6 +12,7 @@ namespace game_project_0
         private Texture2D backgroundTexture;
         private SpriteFont font;
         private MenuButton[] buttons;
+        private InputManager inputManagerKeyboard;
         
         public GameProject0()
         {
@@ -26,10 +27,11 @@ namespace game_project_0
             ship = new ShipSprite();
             buttons = new MenuButton[]
             {
-                new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", X_Offset= -30, Y_Offset= -16},
-                new MenuButton() {Position = new Vector2(400, 310), Text = "Settings", X_Offset= -60, Y_Offset= -16},
-                new MenuButton() {Position = new Vector2(400, 250), Text = "Play", X_Offset= -30, Y_Offset= -16}
+                new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", X_Offset= -30, Y_Offset= -16, Type = MenuButtonState.Quit},
+                new MenuButton() {Position = new Vector2(400, 310), Text = "Settings", X_Offset= -60, Y_Offset= -16, Type = MenuButtonState.Settings},
+                new MenuButton() {Position = new Vector2(400, 250), Text = "Play", X_Offset= -30, Y_Offset= -16, Type = MenuButtonState.Play}
             };
+            inputManagerKeyboard = new InputManager();
             base.Initialize();
         }
 
@@ -48,6 +50,7 @@ namespace game_project_0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            inputManagerKeyboard.Update(gameTime);
             // TODO: Add your update logic here
             ship.Update(gameTime);
             
@@ -60,7 +63,48 @@ namespace game_project_0
             spriteBatch.Begin();
             
             spriteBatch.Draw(backgroundTexture, GraphicsDevice.Viewport.Bounds, Color.White);
-            foreach (var btn in buttons) btn.Draw(gameTime, spriteBatch);
+            foreach (var btn in buttons)
+            {
+                switch (btn.Type)
+                {
+                    case MenuButtonState.Quit:
+                        if(inputManagerKeyboard.Selection == MenuButtonState.Quit)
+                        {
+                            btn.Select(gameTime, MenuButtonState.Quit, spriteBatch);
+                        }
+                        else
+                        {
+                            btn.Draw(gameTime, spriteBatch);
+                        }
+                        break;
+                    case MenuButtonState.Play:
+                        if (inputManagerKeyboard.Selection == MenuButtonState.Play)
+                        {
+                            btn.Select(gameTime, MenuButtonState.Play, spriteBatch);
+                        }
+                        else
+                        {
+                            btn.Draw(gameTime, spriteBatch);
+                        }
+                        break;
+                    case MenuButtonState.Settings:
+                        if (inputManagerKeyboard.Selection == MenuButtonState.Settings)
+                        {
+                            btn.Select(gameTime, MenuButtonState.Settings, spriteBatch);
+                        }
+                        else
+                        {
+                            btn.Draw(gameTime, spriteBatch);
+                        }
+                        break;
+                    default:
+                        btn.Draw(gameTime, spriteBatch);
+                        break;
+
+                }
+
+               
+            }
             spriteBatch.DrawString(font, "Space Rush", new Vector2(210, 50), Color.White);
             
             ship.Draw(gameTime, spriteBatch);
