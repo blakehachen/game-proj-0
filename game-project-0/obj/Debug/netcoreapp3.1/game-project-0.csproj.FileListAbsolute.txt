@@ -38,3 +38,7 @@ C:\Users\Blake\source\repos\game-project-0\game-project-0\obj\Debug\netcoreapp3.
 C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\blueships.xnb
 C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\space.xnb
 C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\kenvector.xnb
+C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\grey_button.xnb
+C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\grey_button_hover.xnb
+C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\File.xnb
+C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\kenvector_thin.xnb

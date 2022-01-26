@@ -5,10 +5,16 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/blueships.png</File>
+    <File>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/kenvector_thin.spritefont</File>
+    <File>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/grey_button.png</File>
+    <File>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/grey_button_hover.png</File>
     <File>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/kenvector.spritefont</File>
     <File>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/space.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

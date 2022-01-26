@@ -11,6 +11,7 @@ namespace game_project_0
         private ShipSprite ship;
         private Texture2D backgroundTexture;
         private SpriteFont font;
+        private MenuButton[] buttons;
         
         public GameProject0()
         {
@@ -23,6 +24,12 @@ namespace game_project_0
         {
             // TODO: Add your initialization logic here
             ship = new ShipSprite();
+            buttons = new MenuButton[]
+            {
+                new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", X_Offset= -30, Y_Offset= -16},
+                new MenuButton() {Position = new Vector2(400, 310), Text = "Settings", X_Offset= -60, Y_Offset= -16},
+                new MenuButton() {Position = new Vector2(400, 250), Text = "Play", X_Offset= -30, Y_Offset= -16}
+            };
             base.Initialize();
         }
 
@@ -30,6 +37,7 @@ namespace game_project_0
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ship.LoadContent(Content);
+            foreach (var btn in buttons) btn.LoadContent(Content);
             backgroundTexture = Content.Load<Texture2D>("space");
             font = Content.Load<SpriteFont>("kenvector");
             // TODO: use this.Content to load your game content here
@@ -42,6 +50,7 @@ namespace game_project_0
 
             // TODO: Add your update logic here
             ship.Update(gameTime);
+            
             base.Update(gameTime);
         }
 
@@ -49,9 +58,13 @@ namespace game_project_0
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
+            
             spriteBatch.Draw(backgroundTexture, GraphicsDevice.Viewport.Bounds, Color.White);
+            foreach (var btn in buttons) btn.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(font, "Space Rush", new Vector2(210, 50), Color.White);
+            
             ship.Draw(gameTime, spriteBatch);
+            
             spriteBatch.End();
             // TODO: Add your drawing code here
 
