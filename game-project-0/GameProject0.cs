@@ -27,9 +27,9 @@ namespace game_project_0
             ship = new ShipSprite();
             buttons = new MenuButton[]
             {
-                new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", X_Offset= -30, Y_Offset= -16, Type = MenuButtonState.Quit},
-                new MenuButton() {Position = new Vector2(400, 310), Text = "Settings", X_Offset= -60, Y_Offset= -16, Type = MenuButtonState.Settings},
-                new MenuButton() {Position = new Vector2(400, 250), Text = "Play", X_Offset= -30, Y_Offset= -16, Type = MenuButtonState.Play}
+                new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", HelperText = "Press [ENTER] or A to Quit", X_Offset= -30, Y_Offset= -16, HelperX_Offset = -75, Type = MenuButtonState.Quit},
+                new MenuButton() {Position = new Vector2(400, 310), Text = "Settings", HelperText = "Not Implemented", X_Offset= -60, Y_Offset= -16, HelperX_Offset = -15, Type = MenuButtonState.Settings},
+                new MenuButton() {Position = new Vector2(400, 250), Text = "Play", HelperText = "Not Implemented", X_Offset= -30, Y_Offset= -16, HelperX_Offset = -15, Type = MenuButtonState.Play}
             };
             inputManagerKeyboard = new InputManager();
             base.Initialize();
