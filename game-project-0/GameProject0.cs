@@ -47,9 +47,7 @@ namespace game_project_0
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
+            if (inputManagerKeyboard.Selection == MenuButtonState.Esc) Exit();
             inputManagerKeyboard.Update(gameTime);
             // TODO: Add your update logic here
             ship.Update(gameTime);
@@ -97,6 +95,8 @@ namespace game_project_0
                             btn.Draw(gameTime, spriteBatch);
                         }
                         break;
+                   
+                        
                     default:
                         btn.Draw(gameTime, spriteBatch);
                         break;

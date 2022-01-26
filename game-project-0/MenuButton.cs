@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Content;
 
 namespace game_project_0
 {
-    
-    
+
+
     public class MenuButton
     {
 
@@ -21,22 +21,22 @@ namespace game_project_0
         public int HelperY_Offset = 0;
         public Vector2 Position;
         public MenuButtonState Type;
+
         private static Vector2 helperPosition = new Vector2(300, 430);
         private Texture2D texture;
         private Texture2D texture_hov;
         private SpriteFont font;
-        
+
         public void LoadContent(ContentManager content)
         {
-            
+
             texture = content.Load<Texture2D>("grey_button");
             font = content.Load<SpriteFont>("kenvector_thin");
             texture_hov = content.Load<Texture2D>("grey_button_hover");
         }
-        
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
 
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        { 
             var text_pos = offsetText(Position, X_Offset, Y_Offset);
 
             spriteBatch.Draw(texture, Position, null, Color.LightGray, 0f, new Vector2(95, 24.5f), 1.0f, SpriteEffects.None, 0);
