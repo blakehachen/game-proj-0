@@ -9,6 +9,7 @@ namespace game_project_0
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private ShipSprite ship;
+        private AsteroidSprite asteroid;
         private Texture2D backgroundTexture;
         private SpriteFont font;
         private MenuButton[] buttons;
@@ -25,6 +26,8 @@ namespace game_project_0
         {
             // TODO: Add your initialization logic here
             ship = new ShipSprite();
+            asteroid = new AsteroidSprite(new Vector2(100, 150));
+
             buttons = new MenuButton[]
             {
                 new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", HelperText = "Press [ENTER] or A to Quit", X_Offset= -30, Y_Offset= -16, HelperX_Offset = -75, Type = MenuButtonState.Quit},
@@ -39,6 +42,7 @@ namespace game_project_0
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ship.LoadContent(Content);
+            asteroid.LoadContent(Content);
             foreach (var btn in buttons) btn.LoadContent(Content);
             backgroundTexture = Content.Load<Texture2D>("space");
             font = Content.Load<SpriteFont>("kenvector");
@@ -51,6 +55,7 @@ namespace game_project_0
             inputManagerKeyboard.Update(gameTime);
             // TODO: Add your update logic here
             ship.Update(gameTime);
+            asteroid.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -108,6 +113,7 @@ namespace game_project_0
             spriteBatch.DrawString(font, "Space Rush", new Vector2(210, 50), Color.White);
             
             ship.Draw(gameTime, spriteBatch);
+            asteroid.Draw(gameTime, spriteBatch);
             
             spriteBatch.End();
             // TODO: Add your drawing code here

@@ -27,7 +27,7 @@ namespace game_project_0
 
         public MenuButtonState Selection { get; private set; } = MenuButtonState.None;
 
-        public Vector2 Direction { get; private set; }
+        
 
         public void Update(GameTime gameTime)
         {
