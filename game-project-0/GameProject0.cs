@@ -37,6 +37,11 @@ namespace game_project_0
                 new MenuButton() {Position = new Vector2(400, 250), Text = "Play", HelperText = "Not Implemented", X_Offset= -30, Y_Offset= -16, HelperX_Offset = -15, Type = MenuButtonState.Play}
             };
             inputManagerKeyboard = new InputManager();
+            foreach(var menuItem in buttons)
+            {
+                inputManagerKeyboard.menuItems.Add(menuItem);
+            }
+            
             base.Initialize();
         }
 

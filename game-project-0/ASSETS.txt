@@ -2,7 +2,7 @@ Menu UI Buttons: from OpenGameArt.org Credit: www.kenney.nl by: CC0-1.0
 
 KenVector Future & KenVector Future Thin Font: from OpenGameArt.org included in Kenney's UI Pack Credit: www.kenney.nl by: CC0-1.0
 
-Ship Sprite & Asteroid Sprite: from OpenGameArt.org created by Master484 Credit: http://m484games.ucoz.com/ by: CC0-1.0
+Ship, Asteroid, Explosion and Bullet Sprite: from OpenGameArt.org created by Master484 Credit: http://m484games.ucoz.com/ by: CC0-1.0
 
 Space Background: from OpenGameArt.org created by Kutejnikov, Drawn for his free game
 Caterpillarnoid https://store.steampowered.com/app/1349920/Caterpillarnoid by: CC0-1.0

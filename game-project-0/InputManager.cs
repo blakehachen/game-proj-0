@@ -25,6 +25,8 @@ namespace game_project_0
         GamePadState currentGamePadState;
         GamePadState priorGamePadState;
 
+        public List<MenuButton> menuItems = new List<MenuButton>();
+
         public MenuButtonState Selection { get; private set; } = MenuButtonState.None;
 
         
@@ -40,7 +42,18 @@ namespace game_project_0
             priorMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
-            if((currentKeyboardState.IsKeyDown(Keys.S) && priorKeyboardState.IsKeyUp(Keys.S)) || 
+            foreach (var menuItem in menuItems)
+            {
+                if ((currentMouseState.X > menuItem.Position.X - 150 && currentMouseState.Y < menuItem.Position.Y + 49) && (priorMouseState.X != currentMouseState.X && priorMouseState.Y != currentMouseState.Y))
+                {
+                    Selection = menuItem.Type;
+
+
+                }
+            }
+
+
+            if ((currentKeyboardState.IsKeyDown(Keys.S) && priorKeyboardState.IsKeyUp(Keys.S)) || 
                 (currentKeyboardState.IsKeyDown(Keys.Down) && priorKeyboardState.IsKeyUp(Keys.Down)) ||
                     (currentGamePadState.ThumbSticks.Left.Y < 0 && priorGamePadState.ThumbSticks.Left.Y == 0) || 
                     (currentGamePadState.DPad.Down == ButtonState.Pressed && priorGamePadState.DPad.Down == ButtonState.Released))
@@ -80,10 +93,13 @@ namespace game_project_0
                 }
             }
 
-            if((currentKeyboardState.IsKeyDown(Keys.Enter) || currentGamePadState.Buttons.A == ButtonState.Pressed) && Selection == MenuButtonState.Quit)
+            if((currentKeyboardState.IsKeyDown(Keys.Enter) || currentGamePadState.Buttons.A == ButtonState.Pressed || currentMouseState.LeftButton == ButtonState.Pressed)  && Selection == MenuButtonState.Quit)
             {
                 Selection = MenuButtonState.Esc;
             }
+
+            
+            
 
             
 
