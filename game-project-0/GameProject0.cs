@@ -17,6 +17,9 @@ namespace game_project_0
         private InputManager inputManagerKeyboard;
         private Texture2D ball;
         
+        /// <summary>
+        /// Constructs initial Project and sets graphics device
+        /// </summary>
         public GameProject0()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -24,9 +27,12 @@ namespace game_project_0
             IsMouseVisible = true;
         }
 
+        /// <summary>
+        /// Initializes various sprites appearing within the main menu
+        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
             ship = new ShipSprite();
             asteroid = new AsteroidSprite();
             asteroid.Position = new Vector2(100, 150);
@@ -45,6 +51,9 @@ namespace game_project_0
             base.Initialize();
         }
 
+        /// <summary>
+        /// Loads background texture, sprite font and bullet sprite.
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -57,13 +66,15 @@ namespace game_project_0
             // TODO: use this.Content to load your game content here
         }
 
+        /// <summary>
+        /// Updates the sprites within the game based on certain criteria
+        /// </summary>
+        /// <param name="gameTime">elapsed game time</param>
         protected override void Update(GameTime gameTime)
         {
             if (inputManagerKeyboard.Selection == MenuButtonState.Esc) Exit();
             inputManagerKeyboard.Update(gameTime);
-            // TODO: Add your update logic here
 
-            
             if (asteroid.Destroyed == false && ship.Bullet.Bounds.CollidesWith(asteroid.Bounds) && ship.Bullet.Fired)
             {
                 asteroid.Destroyed = true;
@@ -83,6 +94,10 @@ namespace game_project_0
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Draws the initialized sprites given there content and criteria
+        /// </summary>
+        /// <param name="gameTime">elapsed gametime</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);

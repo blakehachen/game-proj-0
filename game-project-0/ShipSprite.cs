@@ -24,6 +24,10 @@ namespace game_project_0
 
         private Vector2 position = new Vector2(815, 150);
 
+        /// <summary>
+        /// Load bullet texture and ship sprite texture
+        /// </summary>
+        /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
             
@@ -31,6 +35,10 @@ namespace game_project_0
             Bullet.LoadContent(content);
         }
 
+        /// <summary>
+        /// Update the movement of the ship and shoot bullet
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
@@ -74,6 +82,11 @@ namespace game_project_0
             }
         }
 
+        /// <summary>
+        /// Draws the ship and bullet
+        /// </summary>
+        /// <param name="gameTime">elapsed game time</param>
+        /// <param name="spriteBatch">sprite batch to draw</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             SpriteEffects spriteEffects = (flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

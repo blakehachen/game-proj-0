@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/blueships.png</SourceFile>
-  <SourceTime>2022-01-24T21:11:17.5575088-06:00</SourceTime>
-  <DestFile>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/bin/Windows/Content/blueships.xnb</DestFile>
-  <DestTime>2022-01-24T21:41:57.2542915-06:00</DestTime>
+  <SourceFile>C:/Users/Blake/Documents/CIS 580/game-proj-0/game-project-0/Content/blueships.png</SourceFile>
+  <SourceTime>2022-01-27T22:37:42.4268599-06:00</SourceTime>
+  <DestFile>C:/Users/Blake/Documents/CIS 580/game-proj-0/game-project-0/Content/bin/Windows/Content/blueships.xnb</DestFile>
+  <DestTime>2022-01-27T22:37:53.0092058-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T11:17:54-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

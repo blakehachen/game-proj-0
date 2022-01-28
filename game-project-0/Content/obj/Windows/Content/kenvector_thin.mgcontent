@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/kenvector_thin.spritefont</SourceFile>
-  <SourceTime>2022-01-25T17:54:16.5664868-06:00</SourceTime>
-  <DestFile>C:/Users/Blake/source/repos/game-project-0/game-project-0/Content/bin/Windows/Content/kenvector_thin.xnb</DestFile>
-  <DestTime>2022-01-25T17:54:18.4452832-06:00</DestTime>
+  <SourceFile>C:/Users/Blake/Documents/CIS 580/game-proj-0/game-project-0/Content/kenvector_thin.spritefont</SourceFile>
+  <SourceTime>2022-01-27T22:37:42.428862-06:00</SourceTime>
+  <DestFile>C:/Users/Blake/Documents/CIS 580/game-proj-0/game-project-0/Content/bin/Windows/Content/kenvector_thin.xnb</DestFile>
+  <DestTime>2022-01-27T22:37:53.1512056-06:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2020-08-10T11:17:54-05:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

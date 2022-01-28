@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 namespace game_project_0
 {
+
+    /// <summary>
+    /// Enum containing MenuStates
+    /// </summary>
     public enum MenuButtonState
     {
         Quit,
@@ -27,10 +31,16 @@ namespace game_project_0
 
         public List<MenuButton> menuItems = new List<MenuButton>();
 
+        /// <summary>
+        /// The user's menu selection
+        /// </summary>
         public MenuButtonState Selection { get; private set; } = MenuButtonState.None;
 
         
-
+        /// <summary>
+        /// Updates user input within the game
+        /// </summary>
+        /// <param name="gameTime">elapsed game time</param>
         public void Update(GameTime gameTime)
         {
             priorKeyboardState = currentKeyboardState;
@@ -42,6 +52,8 @@ namespace game_project_0
             priorMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
+
+            //Mouse Input
             foreach (var menuItem in menuItems)
             {
                 if ((currentMouseState.X > menuItem.Position.X - 150 && currentMouseState.Y < menuItem.Position.Y + 49) && (priorMouseState.X != currentMouseState.X && priorMouseState.Y != currentMouseState.Y))
@@ -53,6 +65,7 @@ namespace game_project_0
             }
 
 
+            //Y-Axis Movement (Keyboard, GamePad)
             if ((currentKeyboardState.IsKeyDown(Keys.S) && priorKeyboardState.IsKeyUp(Keys.S)) || 
                 (currentKeyboardState.IsKeyDown(Keys.Down) && priorKeyboardState.IsKeyUp(Keys.Down)) ||
                     (currentGamePadState.ThumbSticks.Left.Y < 0 && priorGamePadState.ThumbSticks.Left.Y == 0) || 
@@ -73,6 +86,7 @@ namespace game_project_0
                 } 
             }
 
+            //X-Axis Movement (Keyboard, GamePad)
             if((currentKeyboardState.IsKeyDown(Keys.W) && priorKeyboardState.IsKeyUp(Keys.W)) || 
                 (currentKeyboardState.IsKeyDown(Keys.Up) && priorKeyboardState.IsKeyUp(Keys.Up)) ||
                     (currentGamePadState.ThumbSticks.Left.Y > 0 && priorGamePadState.ThumbSticks.Left.Y == 0) ||
@@ -93,6 +107,7 @@ namespace game_project_0
                 }
             }
 
+            //Transition GameState to Exit on specific input
             if((currentKeyboardState.IsKeyDown(Keys.Enter) || currentGamePadState.Buttons.A == ButtonState.Pressed || currentMouseState.LeftButton == ButtonState.Pressed)  && Selection == MenuButtonState.Quit)
             {
                 Selection = MenuButtonState.Esc;

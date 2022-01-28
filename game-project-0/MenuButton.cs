@@ -27,6 +27,10 @@ namespace game_project_0
         private Texture2D texture_hov;
         private SpriteFont font;
 
+        /// <summary>
+        /// Load textures for button and selected buttan as well as spritefont
+        /// </summary>
+        /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
 
@@ -35,6 +39,11 @@ namespace game_project_0
             texture_hov = content.Load<Texture2D>("grey_button_hover");
         }
 
+        /// <summary>
+        /// Draw buttons onto menu
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         { 
             var text_pos = offsetText(Position, X_Offset, Y_Offset);
@@ -44,7 +53,12 @@ namespace game_project_0
         }
 
         
-        
+        /// <summary>
+        /// Based on MenuButton state select menu button (controlled by user input)
+        /// </summary>
+        /// <param name="gameTime">elapsed game time</param>
+        /// <param name="menuButton">state of menu button</param>
+        /// <param name="spriteBatch">spritebatch to draw</param>
         public void Select(GameTime gameTime, MenuButtonState menuButton, SpriteBatch spriteBatch)
         {
 
@@ -71,6 +85,13 @@ namespace game_project_0
             }
         }
 
+        /// <summary>
+        /// Helper method for offsetting text for better center position
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="x_offset"></param>
+        /// <param name="y_offset"></param>
+        /// <returns>New offset position</returns>
         private Vector2 offsetText(Vector2 position, int x_offset, int y_offset)
         {
             float offset_x = position.X + x_offset;
@@ -78,6 +99,11 @@ namespace game_project_0
             return new Vector2(offset_x, offset_y);
         }
 
+        /// <summary>
+        /// Helper method for drawing Text for menu button state
+        /// </summary>
+        /// <param name="text_position">position to draw main text</param>
+        /// <param name="spriteBatch">spritebatch to draw</param>
         private void drawSelectString(Vector2 text_position, SpriteBatch spriteBatch)
         {
             var helper_pos = offsetText(helperPosition, HelperX_Offset, HelperY_Offset);

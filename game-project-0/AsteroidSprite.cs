@@ -9,28 +9,48 @@ using Microsoft.Xna.Framework.Content;
 
 namespace game_project_0
 {
+    /// <summary>
+    /// Class representing Asteroid
+    /// </summary>
     public class AsteroidSprite
     {
+        
+        
         private const float ANIMATION_SPEED = 0.03f;
         private double animationTimer;
         private int animationFrame;
-        public Vector2 ExplosionPosition;
-        public Vector2 Position;
         private Texture2D texture;
         private Texture2D explosion;
         private BoundingCircle bounds;
         private Direction Direction = Direction.Right;
         private double directionTimer;
+
+        public Vector2 ExplosionPosition;
+        public Vector2 Position;
+
+        /// <summary>
+        /// Bounding circle representing asteroid collision zone
+        /// </summary>
         public BoundingCircle Bounds => bounds;
 
+        /// <summary>
+        /// Bool specifies whether asteroid has been destroyed
+        /// </summary>
         public bool Destroyed { get; set; } = false;
 
+        /// <summary>
+        /// Construct asteroid sprite and set bounds for Bounding Circle
+        /// </summary>
         public AsteroidSprite()
         {
             
             this.bounds = new BoundingCircle(Position + new Vector2(16, 16), 16);
         }
 
+        /// <summary>
+        /// Update Asteroid Sprite Direction
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
@@ -69,6 +89,10 @@ namespace game_project_0
         }
 
 
+        /// <summary>
+        /// Load asteroid texture and explosion pallete
+        /// </summary>
+        /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("asteroid_pack");
@@ -76,6 +100,11 @@ namespace game_project_0
         }
 
 
+        /// <summary>
+        /// Draw the asteroid or explosion if asteroid is destroyed
+        /// </summary>
+        /// <param name="gameTime">elapsed gametime</param>
+        /// <param name="spriteBatch">spritebatch to draw</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (Destroyed)

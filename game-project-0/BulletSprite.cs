@@ -11,24 +11,44 @@ namespace game_project_0
 {
     public class BulletSprite
     {
-        public Vector2 Position;
+        
         private Texture2D texture;
         private BoundingCircle bounds;
         
         private double directionTimer;
 
+        public Vector2 Position;
+
         public Direction Direction = Direction.Left;
+
+        /// <summary>
+        /// Bounding circle representing bullet collision zone (hitbox)
+        /// </summary>
         public BoundingCircle Bounds => bounds;
 
+        /// <summary>
+        /// Boolean value specifies whether this bullet has been fired
+        /// </summary>
         public bool Fired { get; set; } = false;
 
+        /// <summary>
+        /// Boolean value indicating if the bullet has hit an object
+        /// </summary>
         public bool Hit { get; set; } = false;
+
+        /// <summary>
+        /// Constructs bullet sprite and sets Bounding circle
+        /// </summary>
         public BulletSprite()
         {
             
             this.bounds = new BoundingCircle(Position + new Vector2(4, 4), 4);
         }
 
+        /// <summary>
+        /// Updates the position of the bullet in game
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
@@ -70,12 +90,22 @@ namespace game_project_0
             bounds.Radius = 4;
 
         }
+        
 
+        /// <summary>
+        /// Loads the bullet texture from content manager
+        /// </summary>
+        /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("bullet");
         }
 
+        /// <summary>
+        /// Draws the bullet texture on screen
+        /// </summary>
+        /// <param name="gameTime">elapsed gametime</param>
+        /// <param name="spriteBatch">spritebatch to draw</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (Hit) return;

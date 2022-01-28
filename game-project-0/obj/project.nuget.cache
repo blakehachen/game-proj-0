@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZDTokZM0JMKDhUY+RtBrMq4LMVgIsOO1ogzWzQt1DT2q6zuDDaqkPYl/N4+iKAVxgu5V4XQTY05Q0ON5dJtdBw==",
+  "dgSpecHash": "kcExHKNi2eqYgvdCnfZxmP1NGRTgRkVwofaubTUoTeZd3T+5O5Szl0jJ+aRp3dwD2Pvkd1j28YwgUnQVQyZV8Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Blake\\source\\repos\\game-project-0\\game-project-0\\game-project-0.csproj",
+  "projectFilePath": "C:\\Users\\Blake\\Documents\\CIS 580\\game-proj-0\\game-project-0\\game-project-0.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Blake\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\Blake\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
