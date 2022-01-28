@@ -44,3 +44,4 @@ C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.
 C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\kenvector_thin.xnb
 C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\asteroid_pack.xnb
 C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\bullet.xnb
+C:\Users\Blake\source\repos\game-project-0\game-project-0\bin\Debug\netcoreapp3.1\Content\explosion.xnb

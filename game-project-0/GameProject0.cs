@@ -7,6 +7,7 @@ namespace game_project_0
     public class GameProject0 : Game
     {
         private GraphicsDeviceManager graphics;
+        
         private SpriteBatch spriteBatch;
         private ShipSprite ship;
         private AsteroidSprite asteroid;
@@ -27,8 +28,8 @@ namespace game_project_0
         {
             // TODO: Add your initialization logic here
             ship = new ShipSprite();
-            asteroid = new AsteroidSprite(new Vector2(100, 150));
-
+            asteroid = new AsteroidSprite();
+            asteroid.Position = new Vector2(100, 150);
             buttons = new MenuButton[]
             {
                 new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", HelperText = "Press [ENTER] or A to Quit", X_Offset= -30, Y_Offset= -16, HelperX_Offset = -75, Type = MenuButtonState.Quit},
@@ -58,12 +59,16 @@ namespace game_project_0
             // TODO: Add your update logic here
 
             
-            if (!asteroid.Destroyed && ship.Bullet.Bounds.CollidesWith(asteroid.Bounds))
+            if (asteroid.Destroyed == false && ship.Bullet.Bounds.CollidesWith(asteroid.Bounds) && ship.Bullet.Fired)
             {
                 asteroid.Destroyed = true;
                 ship.Bullet.Hit = true;
+                asteroid.ExplosionPosition = asteroid.Position;
+                
 
             }
+
+            
             
             ship.Update(gameTime);
 
