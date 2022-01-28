@@ -23,14 +23,14 @@ namespace game_project_0
         public AsteroidSprite(Vector2 position)
         {
             this.position = position;
-            this.bounds = new BoundingCircle(position + new Vector2(8, 8), 8);
+            this.bounds = new BoundingCircle(position + new Vector2(16, 16), 16);
         }
 
         public void Update(GameTime gameTime)
         {
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (directionTimer > 5.6 || Destroyed)
+            if (directionTimer > 5.6)
             {
                 switch (Direction)
                 {
@@ -58,6 +58,9 @@ namespace game_project_0
                     
                     break;
             }
+            bounds.Center.X = position.X - 8;
+            bounds.Center.Y = position.Y - 8;
+            bounds.Radius = 16;
         }
 
 
@@ -69,6 +72,7 @@ namespace game_project_0
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (Destroyed) return;
             spriteBatch.Draw(texture, position, null, Color.WhiteSmoke, 0, new Vector2(8, 8), 2.5f, SpriteEffects.None, 0);
         }
     }

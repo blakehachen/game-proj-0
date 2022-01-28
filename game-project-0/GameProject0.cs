@@ -14,6 +14,7 @@ namespace game_project_0
         private SpriteFont font;
         private MenuButton[] buttons;
         private InputManager inputManagerKeyboard;
+        private Texture2D ball;
         
         public GameProject0()
         {
@@ -46,6 +47,7 @@ namespace game_project_0
             foreach (var btn in buttons) btn.LoadContent(Content);
             backgroundTexture = Content.Load<Texture2D>("space");
             font = Content.Load<SpriteFont>("kenvector");
+            ball = Content.Load<Texture2D>("bullet");
             // TODO: use this.Content to load your game content here
         }
 
@@ -54,9 +56,20 @@ namespace game_project_0
             if (inputManagerKeyboard.Selection == MenuButtonState.Esc) Exit();
             inputManagerKeyboard.Update(gameTime);
             // TODO: Add your update logic here
+
+            
+            if (!asteroid.Destroyed && ship.Bullet.Bounds.CollidesWith(asteroid.Bounds))
+            {
+                asteroid.Destroyed = true;
+                ship.Bullet.Hit = true;
+
+            }
+            
             ship.Update(gameTime);
+
             asteroid.Update(gameTime);
             
+
             base.Update(gameTime);
         }
 
@@ -114,7 +127,11 @@ namespace game_project_0
             
             ship.Draw(gameTime, spriteBatch);
             asteroid.Draw(gameTime, spriteBatch);
-            
+            /*var rect = new Rectangle((int)asteroid.Bounds.Center.X - (int)asteroid.Bounds.Radius,
+                                       (int)asteroid.Bounds.Center.Y - (int)asteroid.Bounds.Radius,
+                                       (int)(2.5*asteroid.Bounds.Radius), (int)(2.5*asteroid.Bounds.Radius));
+            spriteBatch.Draw(ball, rect, Color.White);*/
+
             spriteBatch.End();
             // TODO: Add your drawing code here
 

@@ -22,6 +22,7 @@ namespace game_project_0
 
         public bool Fired { get; set; } = false;
 
+        public bool Hit { get; set; } = false;
         public BulletSprite()
         {
             
@@ -45,9 +46,13 @@ namespace game_project_0
                         
                         break;
                 }
-                
+                Hit = false;
+                directionTimer -= 5.6;
+
+
             }
-            directionTimer -= 5.6;
+            
+            
 
             switch (Direction)
             {
@@ -60,6 +65,10 @@ namespace game_project_0
 
                     break;
             }
+            bounds.Center.X = Position.X - 4;
+            bounds.Center.Y = Position.Y - 4;
+            bounds.Radius = 4;
+
         }
 
         public void LoadContent(ContentManager content)
@@ -69,6 +78,8 @@ namespace game_project_0
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (Hit) return;
+            
             spriteBatch.Draw(texture, Position, null, Color.WhiteSmoke, 0, new Vector2(4, 4), 2.5f, SpriteEffects.None, 0);
         }
     }

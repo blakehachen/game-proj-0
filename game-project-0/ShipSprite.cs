@@ -16,7 +16,7 @@ namespace game_project_0
     public class ShipSprite
     {
         private Texture2D texture;
-        private BulletSprite bullet = new BulletSprite();
+        public BulletSprite Bullet = new BulletSprite();
         private double directionTimer;
         private bool flipped;
         
@@ -28,7 +28,7 @@ namespace game_project_0
         {
             
             texture = content.Load<Texture2D>("blueships");
-            bullet.LoadContent(content);
+            Bullet.LoadContent(content);
         }
 
         public void Update(GameTime gameTime)
@@ -36,12 +36,12 @@ namespace game_project_0
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if(directionTimer > 1.0 && directionTimer < 1.1)
             {
-                bullet.Position = new Vector2(position.X-16, position.Y - 12);
-                bullet.Fired = true;
+                Bullet.Position = new Vector2(position.X-16, position.Y - 12);
+                Bullet.Fired = true;
             }
             
                 
-            bullet.Update(gameTime);
+            Bullet.Update(gameTime);
             
             
 
@@ -51,11 +51,11 @@ namespace game_project_0
                 {
                     case Direction.Left:
                         Direction = Direction.Right;
-                        bullet.Direction = Direction.Right;
+                        Bullet.Direction = Direction.Right;
                         break;
                     case Direction.Right:
                         Direction = Direction.Left;
-                        bullet.Direction = Direction.Left;
+                        Bullet.Direction = Direction.Left;
                         break;
                 }
                 directionTimer -= 5.6;
@@ -77,9 +77,9 @@ namespace game_project_0
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             SpriteEffects spriteEffects = (flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            if (bullet.Fired)
+            if (Bullet.Fired)
             {
-                bullet.Draw(gameTime, spriteBatch);
+                Bullet.Draw(gameTime, spriteBatch);
             }
             
             spriteBatch.Draw(texture, position, new Rectangle(82, 23, 14, 14), Color.WhiteSmoke, 0, new Vector2(8,8), 2.5f, spriteEffects, 0);
