@@ -104,14 +104,14 @@ namespace game_project_0.Screens
             // the movement slow down as it nears the end).
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
-            // start at Y = 175; each X value is generated per entry
+            // start at Y = 250; each X value is generated per entry
             var position = new Vector2(0f, 250f);
 
             // update each menu entry's location in turn
             foreach (var menuEntry in _menuEntries)
             {
                 // each entry is to be centered horizontally
-                position.X = ScreenManager.GraphicsDevice.Viewport.Width / 2 - menuEntry.GetWidth(this) / 2;
+                position.X = (ScreenManager.GraphicsDevice.Viewport.Width / 2 - menuEntry.GetWidth(this) / 2) + 92;
 
                 if (ScreenState == ScreenState.TransitionOn)
                     position.X -= transitionOffset * 256;

@@ -80,7 +80,7 @@ namespace game_project_0
         {
             Selected?.Invoke(this, new PlayerIndexEventArgs(playerIndex));
         }
-
+        
         public MenuButton(string text, Vector2 position, string helperText, int x_offset, int y_offset, int helper_x_offset, int helper_y_offset)
         {
             _text = text;
@@ -166,12 +166,12 @@ namespace game_project_0
 
         public virtual int GetHeight(MenuScreen screen)
         {
-            return screen.ScreenManager.Font.LineSpacing;
+            return screen.ScreenManager.Font.LineSpacing + 2;
         }
 
         public virtual int GetWidth(MenuScreen screen)
         {
-            return (int)screen.ScreenManager.Font.MeasureString(Text).X;
+            return (int)texture.Width;
         }
 
 
