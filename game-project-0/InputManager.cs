@@ -58,7 +58,7 @@ namespace game_project_0
             {
                 if ((currentMouseState.X > menuItem.Position.X - 150 && currentMouseState.Y < menuItem.Position.Y + 49) && (priorMouseState.X != currentMouseState.X && priorMouseState.Y != currentMouseState.Y))
                 {
-                    Selection = menuItem.Type;
+                    //Selection = menuItem.Type;
 
 
                 }

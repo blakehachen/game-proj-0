@@ -22,11 +22,11 @@ namespace game_project_0
         private Texture2D texture;
         private Texture2D explosion;
         private BoundingCircle bounds;
-        private Direction Direction = Direction.Right;
-        private double directionTimer;
+        public Direction Direction = Direction.Right;
+        public double directionTimer;
 
         public Vector2 ExplosionPosition;
-        public Vector2 Position;
+        public Vector2 Position = new Vector2(100, 150);
 
         /// <summary>
         /// Bounding circle representing asteroid collision zone
@@ -51,38 +51,9 @@ namespace game_project_0
         /// Update Asteroid Sprite Direction
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        public void UpdateBounds()
         {
-            directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (directionTimer > 5.6)
-            {
-                switch (Direction)
-                {
-                    case Direction.Left:
-                        Direction = Direction.Right;
-                        Position = new Vector2(100, 150);
-                        break;
-                    case Direction.Right:
-                        Direction = Direction.Left;
-                        Position = new Vector2(815, 150);
-                        break;
-                }
-                Destroyed = false;
-                directionTimer -= 5.6;
-            }
-
-            switch (Direction)
-            {
-                case Direction.Left:
-                    Position += new Vector2(-1, 0) * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    
-                    break;
-                case Direction.Right:
-                    Position += new Vector2(1, 0) * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    
-                    break;
-            }
+           
             bounds.Center.X = Position.X - 8;
             bounds.Center.Y = Position.Y - 8;
             bounds.Radius = 16;

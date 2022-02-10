@@ -17,12 +17,12 @@ namespace game_project_0
     {
         private Texture2D texture;
         public BulletSprite Bullet = new BulletSprite();
-        private double directionTimer;
-        private bool flipped;
+        public double directionTimer;
+        public bool flipped;
         
-        private Direction Direction;
+        public Direction Direction;
 
-        private Vector2 position = new Vector2(815, 150);
+        public Vector2 Position = new Vector2(815, 150);
 
         /// <summary>
         /// Load bullet texture and ship sprite texture
@@ -41,45 +41,7 @@ namespace game_project_0
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if(directionTimer > 1.0 && directionTimer < 1.1)
-            {
-                Bullet.Position = new Vector2(position.X-16, position.Y - 12);
-                Bullet.Fired = true;
-            }
             
-                
-            Bullet.Update(gameTime);
-            
-            
-
-            if(directionTimer > 5.6)
-            {
-                switch (Direction)
-                {
-                    case Direction.Left:
-                        Direction = Direction.Right;
-                        Bullet.Direction = Direction.Right;
-                        break;
-                    case Direction.Right:
-                        Direction = Direction.Left;
-                        Bullet.Direction = Direction.Left;
-                        break;
-                }
-                directionTimer -= 5.6;
-            }
-
-            switch (Direction)
-            {
-                case Direction.Left:
-                    position += new Vector2(-1, 0) * 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    flipped = true;
-                    break;
-                case Direction.Right:
-                    position += new Vector2(1, 0) * 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    flipped = false;
-                    break;
-            }
         }
 
         /// <summary>
@@ -95,7 +57,7 @@ namespace game_project_0
                 Bullet.Draw(gameTime, spriteBatch);
             }
             
-            spriteBatch.Draw(texture, position, new Rectangle(82, 23, 14, 14), Color.WhiteSmoke, 0, new Vector2(8,8), 2.5f, spriteEffects, 0);
+            spriteBatch.Draw(texture, Position, new Rectangle(82, 23, 14, 14), Color.WhiteSmoke, 0, new Vector2(8,8), 2.5f, spriteEffects, 0);
         }
     }
 }

@@ -1,20 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using game_project_0.StateManagement;
+using game_project_0.Screens;
 
 namespace game_project_0
 {
     public class GameProject0 : Game
     {
         private GraphicsDeviceManager graphics;
-        
+        private readonly ScreenManager _screenManager;
         private SpriteBatch spriteBatch;
         private ShipSprite ship;
         private AsteroidSprite asteroid;
         private Texture2D backgroundTexture;
         private SpriteFont font;
         private MenuButton[] buttons;
-        private InputManager inputManagerKeyboard;
+        //private InputManager inputManagerKeyboard;
         private Texture2D ball;
         
         /// <summary>
@@ -25,6 +27,20 @@ namespace game_project_0
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            var screenFactory = new ScreenFactory();
+            Services.AddService(typeof(IScreenFactory), screenFactory);
+
+            _screenManager = new ScreenManager(this);
+            Components.Add(_screenManager);
+
+            AddInitialScreens();
+        }
+
+        private void AddInitialScreens()
+        {
+            _screenManager.AddScreen(new BackgroundScreen(), null);
+            _screenManager.AddScreen(new MainMenuScreen(), null);
         }
 
         /// <summary>
@@ -33,10 +49,7 @@ namespace game_project_0
         protected override void Initialize()
         {
             
-            ship = new ShipSprite();
-            asteroid = new AsteroidSprite();
-            asteroid.Position = new Vector2(100, 150);
-            buttons = new MenuButton[]
+            /*buttons = new MenuButton[]
             {
                 new MenuButton() {Position = new Vector2(400, 370), Text = "Quit", HelperText = "Press [ENTER] or A to Quit", X_Offset= -30, Y_Offset= -16, HelperX_Offset = -75, Type = MenuButtonState.Quit},
                 new MenuButton() {Position = new Vector2(400, 310), Text = "Settings", HelperText = "Not Implemented", X_Offset= -60, Y_Offset= -16, HelperX_Offset = -15, Type = MenuButtonState.Settings},
@@ -46,7 +59,7 @@ namespace game_project_0
             foreach(var menuItem in buttons)
             {
                 inputManagerKeyboard.menuItems.Add(menuItem);
-            }
+            }*/
             
             base.Initialize();
         }
@@ -56,13 +69,12 @@ namespace game_project_0
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            ship.LoadContent(Content);
-            asteroid.LoadContent(Content);
-            foreach (var btn in buttons) btn.LoadContent(Content);
-            backgroundTexture = Content.Load<Texture2D>("space");
-            font = Content.Load<SpriteFont>("kenvector");
-            ball = Content.Load<Texture2D>("bullet");
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
+           
+            //foreach (var btn in buttons) btn.LoadContent(Content);
+            //backgroundTexture = Content.Load<Texture2D>("space");
+            //font = Content.Load<SpriteFont>("kenvector");
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -72,25 +84,10 @@ namespace game_project_0
         /// <param name="gameTime">elapsed game time</param>
         protected override void Update(GameTime gameTime)
         {
-            if (inputManagerKeyboard.Selection == MenuButtonState.Esc) Exit();
-            inputManagerKeyboard.Update(gameTime);
-
-            if (asteroid.Destroyed == false && ship.Bullet.Bounds.CollidesWith(asteroid.Bounds) && ship.Bullet.Fired)
-            {
-                asteroid.Destroyed = true;
-                ship.Bullet.Hit = true;
-                asteroid.ExplosionPosition = asteroid.Position;
-                
-
-            }
+            //if (inputManagerKeyboard.Selection == MenuButtonState.Esc) Exit();
+            //inputManagerKeyboard.Update(gameTime);
 
             
-            
-            ship.Update(gameTime);
-
-            asteroid.Update(gameTime);
-            
-
             base.Update(gameTime);
         }
 
@@ -101,7 +98,7 @@ namespace game_project_0
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin();
+            /*spriteBatch.Begin();
             
             spriteBatch.Draw(backgroundTexture, GraphicsDevice.Viewport.Bounds, Color.White);
             foreach (var btn in buttons)
@@ -147,17 +144,17 @@ namespace game_project_0
                 }
 
                
-            }
-            spriteBatch.DrawString(font, "Space Rush", new Vector2(210, 50), Color.White);
+            }*/
+            //spriteBatch.DrawString(font, "Space Rush", new Vector2(210, 50), Color.White);
             
-            ship.Draw(gameTime, spriteBatch);
-            asteroid.Draw(gameTime, spriteBatch);
+            //ship.Draw(gameTime, spriteBatch);
+            //asteroid.Draw(gameTime, spriteBatch);
             /*var rect = new Rectangle((int)asteroid.Bounds.Center.X - (int)asteroid.Bounds.Radius,
                                        (int)asteroid.Bounds.Center.Y - (int)asteroid.Bounds.Radius,
                                        (int)(2.5*asteroid.Bounds.Radius), (int)(2.5*asteroid.Bounds.Radius));
             spriteBatch.Draw(ball, rect, Color.White);*/
 
-            spriteBatch.End();
+            //spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
