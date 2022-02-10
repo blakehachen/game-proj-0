@@ -105,7 +105,7 @@ namespace game_project_0.Screens
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             // start at Y = 175; each X value is generated per entry
-            var position = new Vector2(0f, 175f);
+            var position = new Vector2(0f, 250f);
 
             // update each menu entry's location in turn
             foreach (var menuEntry in _menuEntries)
@@ -159,6 +159,7 @@ namespace game_project_0.Screens
             var graphics = ScreenManager.GraphicsDevice;
             var spriteBatch = ScreenManager.SpriteBatch;
             var font = ScreenManager.Font;
+
 
             spriteBatch.Begin();
 

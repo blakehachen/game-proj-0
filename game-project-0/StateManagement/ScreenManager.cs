@@ -25,6 +25,8 @@ namespace game_project_0.StateManagement
         /// </summary>
         public SpriteFont Font { get; private set; }
 
+        public SpriteFont SecondaryFont { get; private set; }
+
         /// <summary>
         /// A blank texture that can be used by the screens.
         /// </summary>
@@ -55,6 +57,7 @@ namespace game_project_0.StateManagement
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             Font = _content.Load<SpriteFont>("kenvector");
+            SecondaryFont = _content.Load<SpriteFont>("kenvector_thin");
             BlankTexture = _content.Load<Texture2D>("blank");
 
             // Tell each of the screens to load thier content 

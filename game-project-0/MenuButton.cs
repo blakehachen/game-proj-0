@@ -124,7 +124,7 @@ namespace game_project_0
             var text_pos = offsetText(Position, x_offset, y_offset);
             var screenManager = screen.ScreenManager;
             var spriteBatch = screenManager.SpriteBatch;
-            var font = screenManager.Font;
+            var font = screenManager.SecondaryFont;
             if (isSelected)
             {
                 spriteBatch.Draw(texture_hov, Position, null, Color.LightGray, 0f, new Vector2(95, 24.5f), 1.0f, SpriteEffects.None, 0);
@@ -160,8 +160,8 @@ namespace game_project_0
         private void drawSelectString(MenuScreen screen, Vector2 text_position, SpriteBatch spriteBatch)
         {
             var helper_pos = offsetText(helperPosition, Helper_x_Offset, Helper_y_Offset);
-            spriteBatch.DrawString(screen.ScreenManager.Font, Text, text_position, Color.CornflowerBlue);
-            spriteBatch.DrawString(screen.ScreenManager.Font, HelperText, helper_pos, Color.White);
+            spriteBatch.DrawString(screen.ScreenManager.SecondaryFont, Text, text_position, Color.CornflowerBlue);
+            spriteBatch.DrawString(screen.ScreenManager.SecondaryFont, HelperText, helper_pos, Color.White);
         }
 
         public virtual int GetHeight(MenuScreen screen)
