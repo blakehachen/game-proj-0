@@ -47,6 +47,7 @@ namespace game_project_0.Screens
             base.Update(gameTime, otherScreenHasFocus, false);
             _ship.directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
             _asteroid.directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            _ship.Bullet.directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
             
             if (_asteroid.Destroyed == false && _ship.Bullet.Bounds.CollidesWith(_asteroid.Bounds) && _ship.Bullet.Fired)
             {
@@ -78,7 +79,15 @@ namespace game_project_0.Screens
                         
                         break;
                 }
-
+                switch (_ship.Bullet.Direction)
+                {
+                    case Direction.Left:
+                        _ship.Bullet.Direction = Direction.Right;
+                        break;
+                    case Direction.Right:
+                        _ship.Bullet.Direction = Direction.Left;
+                        break;
+                }
                 switch (_asteroid.Direction)
                 {
                     case Direction.Left:
@@ -91,6 +100,8 @@ namespace game_project_0.Screens
                         break;
                 }
                 _ship.directionTimer -= 5.6;
+                _ship.Bullet.directionTimer -= 5.6;
+                _ship.Bullet.Hit = false;
                 _asteroid.Destroyed = false;
                 _asteroid.directionTimer -= 5.6;
             }
@@ -107,20 +118,10 @@ namespace game_project_0.Screens
                     break;
             }
 
-            switch (_asteroid.Direction)
-            {
-                case Direction.Left:
-                    _asteroid.Position += new Vector2(-1, 0) * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    
-                    break;
-                case Direction.Right:
-                    _asteroid.Position += new Vector2(1, 0) * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
 
-                    break;
-            }
-
-
-            _asteroid.UpdateBounds();
+            _ship.Bullet.Update(gameTime);
+            _asteroid.Update(gameTime);
 
         }
 

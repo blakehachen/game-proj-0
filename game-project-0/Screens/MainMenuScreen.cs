@@ -23,7 +23,7 @@ namespace game_project_0.Screens
 
         private void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            
+            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex, new GameplayScreen());
         }
 
         private void SettingsMenuEntrySelected(object sender, PlayerIndexEventArgs e)

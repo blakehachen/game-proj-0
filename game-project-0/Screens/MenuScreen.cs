@@ -34,10 +34,10 @@ namespace game_project_0.Screens
 
             _menuUp = new InputAction(
                 new[] { Buttons.DPadUp, Buttons.LeftThumbstickUp },
-                new[] { Keys.Up }, true);
+                new[] { Keys.Up, Keys.W }, true);
             _menuDown = new InputAction(
                 new[] { Buttons.DPadDown, Buttons.LeftThumbstickDown },
-                new[] { Keys.Down }, true);
+                new[] { Keys.Down, Keys.S}, true);
             _menuSelect = new InputAction(
                 new[] { Buttons.A, Buttons.Start },
                 new[] { Keys.Enter, Keys.Space }, true);

@@ -15,7 +15,7 @@ namespace game_project_0
         private Texture2D texture;
         private BoundingCircle bounds;
         
-        private double directionTimer;
+        public double directionTimer;
 
         public Vector2 Position;
 
@@ -51,29 +51,7 @@ namespace game_project_0
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (Fired && directionTimer > 5.6)
-            {
-                switch (Direction)
-                {
-                    case Direction.Left:
-                        Direction = Direction.Right;
-                        
-                        break;
-                    case Direction.Right:
-                        Direction = Direction.Left;
-                        
-                        break;
-                }
-                Hit = false;
-                directionTimer -= 5.6;
-
-
-            }
             
-            
-
             switch (Direction)
             {
                 case Direction.Left:
@@ -85,6 +63,7 @@ namespace game_project_0
 
                     break;
             }
+            
             bounds.Center.X = Position.X - 4;
             bounds.Center.Y = Position.Y - 4;
             bounds.Radius = 4;

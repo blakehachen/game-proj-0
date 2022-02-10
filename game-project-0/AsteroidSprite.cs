@@ -51,9 +51,20 @@ namespace game_project_0
         /// Update Asteroid Sprite Direction
         /// </summary>
         /// <param name="gameTime"></param>
-        public void UpdateBounds()
+        public void Update(GameTime gameTime)
         {
-           
+            switch (Direction)
+            {
+                case Direction.Left:
+                    Position += new Vector2(-1, 0) * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    break;
+                case Direction.Right:
+                    Position += new Vector2(1, 0) * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    break;
+            }
+
             bounds.Center.X = Position.X - 8;
             bounds.Center.Y = Position.Y - 8;
             bounds.Radius = 16;

@@ -19,9 +19,13 @@ namespace game_project_0
         public BulletSprite Bullet = new BulletSprite();
         public double directionTimer;
         public bool flipped;
-        
+        private int _height;
         public Direction Direction;
-
+        public int Height
+        {
+            get => _height;
+            set => _height = value;
+        }
         public Vector2 Position = new Vector2(815, 150);
 
         /// <summary>
@@ -33,6 +37,7 @@ namespace game_project_0
             
             texture = content.Load<Texture2D>("blueships");
             Bullet.LoadContent(content);
+            _height = 23;
         }
 
         /// <summary>
