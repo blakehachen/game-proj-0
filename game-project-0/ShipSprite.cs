@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using game_project_0.Collisions;
 
 public enum Direction
 {
@@ -21,6 +22,7 @@ namespace game_project_0
         public bool flipped;
         private int _height;
         public Direction Direction;
+        
         public int Height
         {
             get => _height;
@@ -28,6 +30,8 @@ namespace game_project_0
         }
         public Vector2 Position = new Vector2(815, 150);
 
+        private BoundingRectangle bounds = new BoundingRectangle(new Vector2(815 - 7, 150 - 7), 14, 14);
+        public BoundingRectangle Bounds => bounds;
         /// <summary>
         /// Load bullet texture and ship sprite texture
         /// </summary>
@@ -57,6 +61,9 @@ namespace game_project_0
                     flipped = false;
                     break;
             }
+
+            bounds.X = Position.X - 14;
+            bounds.Y = Position.Y - 14;
         }
 
         /// <summary>

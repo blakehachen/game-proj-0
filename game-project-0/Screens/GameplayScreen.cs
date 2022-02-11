@@ -48,11 +48,11 @@ namespace game_project_0.Screens
             _gameFont = _content.Load<SpriteFont>("kenvector_thin");
             _backgroundTexture = _content.Load<Texture2D>("space");
             _ship = new ShipSprite();
-            
+            _ship.Direction = Direction.Right;
             for(int i = 0; i < ASTEROID_COUNT; i++)
             {
                 var a = new AsteroidSprite();
-                a.Position = new Vector2(760, _random.Next(_ship.Height, 480 - _ship.Height));
+                a.Position = new Vector2(760, _random.Next(_ship.Height, 460 - (_ship.Height*2)));
                 a.Direction = Direction.Left;
                 a.LoadContent(_content);
                 _asteroids.Add(a);
@@ -87,7 +87,7 @@ namespace game_project_0.Screens
             {
                 // TODO: Add sprite effects, or possible asteroid sprite spawn logic
                 _timer += gameTime.ElapsedGameTime.TotalSeconds;
-                
+                _ship.Update(gameTime);
                 if(_timer > 1.1 && _drawnAsteroids < ASTEROID_COUNT)
                 {
                     _drawnAsteroids++;
@@ -102,9 +102,16 @@ namespace game_project_0.Screens
                     {
                         _asteroids[i].Destroyed = true;
                         _ship.Bullet.Hit = true;
+                        _ship.Bullet.Fired = false;
                         _asteroids[i].ExplosionPosition = _asteroids[i].Position;
 
 
+                    }
+
+                    if(_asteroids[i].Destroyed == false && _asteroids[i].Bounds.CollidesWith(_ship.Bounds))
+                    {
+                        _asteroids[i].Destroyed = true;
+                        _asteroids[i].ExplosionPosition = _asteroids[i].Position;
                     }
                 }
                 
