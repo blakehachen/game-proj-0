@@ -54,19 +54,19 @@ namespace game_project_0.Screens
                 _asteroid.Destroyed = true;
                 _ship.Bullet.Hit = true;
                 _asteroid.ExplosionPosition = _asteroid.Position;
-
+                _ship.Bullet.Fired = false;
 
             }
 
-            if (_ship.directionTimer > 1.0 && _ship.directionTimer < 1.1)
+            if (_ship.directionTimer > 1.4 && _ship.directionTimer < 1.45)
             {
                 _ship.Bullet.Position = new Vector2(_ship.Position.X - 16, _ship.Position.Y - 12);
                 _ship.Bullet.Fired = true;
             }
 
-            _ship.Bullet.Update(gameTime);
+            //_ship.Bullet.Update(gameTime);
 
-            if(_ship.directionTimer > 5.6 || _asteroid.directionTimer > 5.6)
+            if(_ship.directionTimer > 5.6)
             {
                 switch (_ship.Direction)
                 {
@@ -106,21 +106,12 @@ namespace game_project_0.Screens
                 _asteroid.directionTimer -= 5.6;
             }
 
-            switch (_ship.Direction)
-            {
-                case Direction.Left:
-                    _ship.Position += new Vector2(-1, 0) * 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    _ship.flipped = true;
-                    break;
-                case Direction.Right:
-                    _ship.Position += new Vector2(1, 0) * 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    _ship.flipped = false;
-                    break;
-            }
-
             
 
+
+            _ship.Update(gameTime);
             _ship.Bullet.Update(gameTime);
+            
             _asteroid.Update(gameTime);
 
         }

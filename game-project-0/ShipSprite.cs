@@ -46,7 +46,17 @@ namespace game_project_0
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            
+            switch (Direction)
+            {
+                case Direction.Left:
+                    Position += new Vector2(-1, 0) * 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    flipped = true;
+                    break;
+                case Direction.Right:
+                    Position += new Vector2(1, 0) * 150 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    flipped = false;
+                    break;
+            }
         }
 
         /// <summary>

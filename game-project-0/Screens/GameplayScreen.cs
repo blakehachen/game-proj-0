@@ -15,7 +15,6 @@ namespace game_project_0.Screens
         private SpriteFont _gameFont;
         private Texture2D _backgroundTexture;
         private ShipSprite _ship;
-        private AsteroidSprite _asteroid;
         private const int ASTEROID_COUNT = 100;
         private double _timer;
         private int _drawnAsteroids = 1;
@@ -49,7 +48,7 @@ namespace game_project_0.Screens
             _gameFont = _content.Load<SpriteFont>("kenvector_thin");
             _backgroundTexture = _content.Load<Texture2D>("space");
             _ship = new ShipSprite();
-            _asteroid = new AsteroidSprite();
+            
             for(int i = 0; i < ASTEROID_COUNT; i++)
             {
                 var a = new AsteroidSprite();
@@ -59,15 +58,8 @@ namespace game_project_0.Screens
                 _asteroids.Add(a);
 
             }
-            _asteroid.Position = new Vector2(760, _random.Next(_ship.Height, 480 - _ship.Height));
-            _asteroid.Direction = Direction.Left;
-                
-            
-            
 
             _ship.LoadContent(_content);
-            
-            _asteroid.LoadContent(_content);
 
             ScreenManager.Game.ResetElapsedTime();
         }
@@ -95,7 +87,7 @@ namespace game_project_0.Screens
             {
                 // TODO: Add sprite effects, or possible asteroid sprite spawn logic
                 _timer += gameTime.ElapsedGameTime.TotalSeconds;
-                //_asteroid.Update(gameTime);
+                
                 if(_timer > 1.1 && _drawnAsteroids < ASTEROID_COUNT)
                 {
                     _drawnAsteroids++;
@@ -117,18 +109,7 @@ namespace game_project_0.Screens
                 }
                 
                 _ship.Bullet.Update(gameTime);
-                /*if (_asteroid.Destroyed == false && _ship.Bullet.Bounds.CollidesWith(_asteroid.Bounds) && _ship.Bullet.Fired)
-                {
-                    _asteroid.Destroyed = true;
-                    _ship.Bullet.Hit = true;
-                    _asteroid.ExplosionPosition = _asteroid.Position;
 
-
-                }*/
-
-                
-                
-                
 
             }
         }
@@ -196,8 +177,6 @@ namespace game_project_0.Screens
             spriteBatch.Draw(_backgroundTexture, fullscreen, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
             _ship.Position = _playerPosition;
             _ship.Draw(gameTime, spriteBatch);
-            
-            //_asteroid.Draw(gameTime, spriteBatch);
             
             for(int i = 0; i < _drawnAsteroids; i++)
             {
