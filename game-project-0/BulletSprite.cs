@@ -51,18 +51,22 @@ namespace game_project_0
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            
-            switch (Direction)
+
+            if (!Hit)
             {
-                case Direction.Left:
-                    Position += new Vector2(-1, 0) * 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                switch (Direction)
+                {
+                    case Direction.Left:
+                        Position += new Vector2(-1, 0) * 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                    break;
-                case Direction.Right:
-                    Position += new Vector2(1, 0) * 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        break;
+                    case Direction.Right:
+                        Position += new Vector2(1, 0) * 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                    break;
+                        break;
+                }
             }
+            
             
             bounds.Center.X = Position.X - 4;
             bounds.Center.Y = Position.Y - 4;
