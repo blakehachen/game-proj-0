@@ -65,9 +65,9 @@ namespace game_project_0
                     break;
             }
 
-            bounds.Center.X = Position.X - 8;
-            bounds.Center.Y = Position.Y - 8;
-            bounds.Radius = 16;
+            bounds.Center.X = Position.X - 12;
+            bounds.Center.Y = Position.Y - 12;
+            bounds.Radius = 24;
         }
 
 

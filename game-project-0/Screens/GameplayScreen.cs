@@ -15,10 +15,14 @@ namespace game_project_0.Screens
         private SpriteFont _gameFont;
         private Texture2D _backgroundTexture;
         private ShipSprite _ship;
-        private const int ASTEROID_COUNT = 100;
+        private const int ASTEROID_COUNT = 50;
+        private int _health = 100;
         private double _timer;
+        private double _bulletTimer;
+        private bool _bulletLock = false;
         private int _drawnAsteroids = 1;
         private List<AsteroidSprite> _asteroids = new List<AsteroidSprite>();
+        
         //Needs Random placement of asteroids. Array
         //private AsteroidSprite _asteroid;
         private Vector2 _playerPosition = new Vector2(50, 100);
@@ -52,7 +56,7 @@ namespace game_project_0.Screens
             for(int i = 0; i < ASTEROID_COUNT; i++)
             {
                 var a = new AsteroidSprite();
-                a.Position = new Vector2(760, _random.Next(_ship.Height, 460 - (_ship.Height*2)));
+                a.Position = new Vector2(770, _random.Next(100, 400));
                 a.Direction = Direction.Left;
                 a.LoadContent(_content);
                 _asteroids.Add(a);
@@ -87,13 +91,39 @@ namespace game_project_0.Screens
             {
                 // TODO: Add sprite effects, or possible asteroid sprite spawn logic
                 _timer += gameTime.ElapsedGameTime.TotalSeconds;
+                if (_bulletLock)
+                {
+                    _bulletTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                
+                if (_bulletTimer > 0.7)
+                {
+                    _bulletLock = false;
+                    _bulletTimer -= 0.7;
+                }
+                
                 _ship.Update(gameTime);
                 if(_timer > 1.1 && _drawnAsteroids < ASTEROID_COUNT)
                 {
                     _drawnAsteroids++;
                     _timer -= 1.1;
                 }
+                
+                if(_health <= 0)
+                {
+                    //END GAME LOST
+                    _health = 0;
+                    ScreenManager.AddScreen(new LoserScreen(), ControllingPlayer);
+                }
 
+                if (_asteroids[_asteroids.Count - 1].Destroyed && _health > 0)
+                {
+                    //END GAME WIN
+
+                    ScreenManager.AddScreen(new WinnerScreen(), ControllingPlayer);
+                    
+
+                }
                 for (int i = 0; i < _drawnAsteroids; i++)
                 {
                     _asteroids[i].Update(gameTime);
@@ -112,6 +142,14 @@ namespace game_project_0.Screens
                     {
                         _asteroids[i].Destroyed = true;
                         _asteroids[i].ExplosionPosition = _asteroids[i].Position;
+                        _health -= 20;
+                    }
+
+                    if(!_asteroids[i].Destroyed && _asteroids[i].Position.X <= -30)
+                    {
+                        _asteroids[i].Destroyed = true;
+                        _asteroids[i].ExplosionPosition = _asteroids[i].Position;
+                        _health -= 10;
                     }
                 }
                 
@@ -149,8 +187,9 @@ namespace game_project_0.Screens
 
                 if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up) || thumbstick.Y > 0)
                     movement.Y--;
-                if (keyboardState.IsKeyDown(Keys.Space))
+                if (keyboardState.IsKeyDown(Keys.Space) && !_bulletLock)
                 {
+                    _bulletLock = true;
                     _ship.Bullet.Position = new Vector2(_ship.Position.X - 16, _ship.Position.Y - 12);
                     _ship.Bullet.Fired = true;
                     _ship.Bullet.Hit = false;
@@ -161,7 +200,7 @@ namespace game_project_0.Screens
                 if (movement.Length() > 1)
                     movement.Normalize();
 
-                _playerPosition += movement * 6f;
+                _playerPosition += movement * 5f;
 
                 int top = 480 - _ship.Height;
                 
@@ -177,11 +216,21 @@ namespace game_project_0.Screens
         {
             var viewport = ScreenManager.GraphicsDevice.Viewport;
             var fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
-
+            var healthstring = "Health: " + _health;
+            var healthColor = Color.Green;
+            if(_health <= 60 && _health >= 40)
+            {
+                healthColor = Color.Yellow;
+            }
+            if(_health <= 30 &&  _health >= 0)
+            {
+                healthColor = Color.Red;
+            }
             var spriteBatch = ScreenManager.SpriteBatch;
 
             spriteBatch.Begin();
             spriteBatch.Draw(_backgroundTexture, fullscreen, new Color(TransitionAlpha, TransitionAlpha, TransitionAlpha));
+            spriteBatch.DrawString(_gameFont, healthstring, new Vector2(640, 440), healthColor);
             _ship.Position = _playerPosition;
             _ship.Draw(gameTime, spriteBatch);
             
