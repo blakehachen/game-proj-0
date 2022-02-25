@@ -20,7 +20,10 @@ namespace game_project_0.Screens
             MenuEntries.Add(settingsGameMenuEntry);
             MenuEntries.Add(quitGameMenuEntry);
         }
-
+        public override void Activate()
+        {
+            base.Activate();
+        }
         private void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex, new GameplayScreen());

@@ -1,10 +1,15 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace game_project_0.StateManagement
 {
     public abstract class GameScreen
     {
+        private ContentManager _musicManager;
+        private Song _backgroundMusic;
         /// <summary>
         /// Indicates if this screen is a popup
         /// </summary>
@@ -86,7 +91,12 @@ namespace game_project_0.StateManagement
         /// Activates the screen.  Called when the screen is added to the screen manager 
         /// or the game returns from being paused.
         /// </summary>
-        public virtual void Activate() { }
+        public virtual void Activate() {
+            _musicManager = new ContentManager(ScreenManager.Game.Services, "Content");
+            _backgroundMusic = _musicManager.Load<Song>("ZombiesAreComing");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(_backgroundMusic);
+        }
 
         /// <summary>
         /// Deactivates the screen.  Called when the screen is removed from the screen manager 

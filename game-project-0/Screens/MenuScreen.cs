@@ -133,10 +133,12 @@ namespace game_project_0.Screens
             {
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
+            
             foreach(var m in _menuEntries)
             {
                 m.LoadContent(_content);
             }
+
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)

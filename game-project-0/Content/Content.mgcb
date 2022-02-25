@@ -73,6 +73,12 @@
 /processorParam:TextureFormat=Color
 /build:explosion.png
 
+#begin Explosion_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Explosion_sound.wav
+
 #begin grey_button.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -111,6 +117,12 @@
 /processorParam:TextureFormat=Compressed
 /build:kenvector_thin.spritefont
 
+#begin Laser_Shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Laser_Shoot.wav
+
 #begin space.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -122,4 +134,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:space.png
+
+#begin ZombiesAreComing.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:ZombiesAreComing.wav
 

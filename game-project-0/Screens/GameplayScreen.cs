@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using game_project_0.StateManagement;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
+
 namespace game_project_0.Screens
 {
     public class GameplayScreen : GameScreen
@@ -15,6 +18,8 @@ namespace game_project_0.Screens
         private SpriteFont _gameFont;
         private Texture2D _backgroundTexture;
         private ShipSprite _ship;
+        private SoundEffect _laserSound;
+        private SoundEffect _explosionSound;
         private const int ASTEROID_COUNT = 50;
         private int _health = 100;
         private double _timer;
@@ -44,11 +49,14 @@ namespace game_project_0.Screens
 
         public override void Activate()
         {
+
+            base.Activate();
             if(_content == null)
             {
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
-
+            _laserSound = _content.Load<SoundEffect>("Laser_Shoot");
+            _explosionSound = _content.Load<SoundEffect>("Explosion_sound");
             _gameFont = _content.Load<SpriteFont>("kenvector_thin");
             _backgroundTexture = _content.Load<Texture2D>("space");
             _ship = new ShipSprite();
@@ -130,6 +138,7 @@ namespace game_project_0.Screens
                     
                     if (_asteroids[i].Destroyed == false && _ship.Bullet.Bounds.CollidesWith(_asteroids[i].Bounds) && _ship.Bullet.Fired)
                     {
+                        _explosionSound.Play();
                         _asteroids[i].Destroyed = true;
                         _ship.Bullet.Hit = true;
                         _ship.Bullet.Fired = false;
@@ -140,6 +149,7 @@ namespace game_project_0.Screens
 
                     if(_asteroids[i].Destroyed == false && _asteroids[i].Bounds.CollidesWith(_ship.Bounds))
                     {
+                        _explosionSound.Play();
                         _asteroids[i].Destroyed = true;
                         _asteroids[i].ExplosionPosition = _asteroids[i].Position;
                         _health -= 20;
@@ -189,6 +199,7 @@ namespace game_project_0.Screens
                     movement.Y--;
                 if (keyboardState.IsKeyDown(Keys.Space) && !_bulletLock)
                 {
+                    _laserSound.Play();
                     _bulletLock = true;
                     _ship.Bullet.Position = new Vector2(_ship.Position.X - 16, _ship.Position.Y - 12);
                     _ship.Bullet.Fired = true;
