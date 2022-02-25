@@ -8,3 +8,5 @@ Space Background: from OpenGameArt.org created by Kutejnikov, Drawn for his free
 Caterpillarnoid https://store.steampowered.com/app/1349920/Caterpillarnoid by: CC0-1.0
 
 ZombiesAreComing.wav: from OpenGameArt.org created by "yd"
+
+Laser_sound and Explosion_sound: Created by me using bfxr software
