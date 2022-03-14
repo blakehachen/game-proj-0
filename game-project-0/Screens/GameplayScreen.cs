@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using game_project_0.StateManagement;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using game_project_0.ParticleSystem;
 
 namespace game_project_0.Screens
 {
@@ -20,6 +21,8 @@ namespace game_project_0.Screens
         private ShipSprite _ship;
         private SoundEffect _laserSound;
         private SoundEffect _explosionSound;
+        private ExplosionParticleSystem _explosion;
+
         private const int ASTEROID_COUNT = 50;
         private int _health = 100;
         private double _timer;
@@ -51,6 +54,8 @@ namespace game_project_0.Screens
         {
 
             base.Activate();
+            _explosion = new ExplosionParticleSystem(this, 20);
+            Components.Add(_explosion);
             if(_content == null)
             {
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
@@ -143,7 +148,9 @@ namespace game_project_0.Screens
                         _ship.Bullet.Hit = true;
                         _ship.Bullet.Fired = false;
                         _asteroids[i].ExplosionPosition = _asteroids[i].Position;
-
+                        _explosion.PlaceExplosion(_asteroids[i].ExplosionPosition);
+                        Velocity = _asteroids[i].ExplosionPosition - Position;
+                        Position = _asteroids[i].ExplosionPosition;
 
                     }
 
@@ -164,7 +171,7 @@ namespace game_project_0.Screens
                 }
                 
                 _ship.Bullet.Update(gameTime);
-
+                
 
             }
         }
@@ -225,6 +232,7 @@ namespace game_project_0.Screens
 
         public override void Draw(GameTime gameTime)
         {
+            
             var viewport = ScreenManager.GraphicsDevice.Viewport;
             var fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
             var healthstring = "Health: " + _health;

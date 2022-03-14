@@ -3,13 +3,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using game_project_0.ParticleSystem;
 
 namespace game_project_0.StateManagement
 {
-    public abstract class GameScreen
+    public abstract class GameScreen : Game, IParticleEmitter
     {
         private ContentManager _musicManager;
         private Song _backgroundMusic;
+
+        public Vector2 Position { get; set; }
+        public Vector2 Velocity { get; set; }
         /// <summary>
         /// Indicates if this screen is a popup
         /// </summary>

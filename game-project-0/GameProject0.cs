@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using game_project_0.StateManagement;
 using game_project_0.Screens;
+using game_project_0.ParticleSystem;
 
 namespace game_project_0
 {
