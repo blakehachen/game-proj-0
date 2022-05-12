@@ -13,7 +13,7 @@ using game_project_0.ParticleSystem;
 
 namespace game_project_0.Screens
 {
-    public class GameplayScreen : GameScreen
+    public class GameplayScreen3 : GameScreen
     {
         private ContentManager _content;
         private SpriteFont _gameFont;
@@ -23,15 +23,15 @@ namespace game_project_0.Screens
         private SoundEffect _explosionSound;
         private ExplosionParticleSystem _explosion;
 
-        private const int ASTEROID_COUNT = 50;
+        private const int ASTEROID_COUNT = 100;
         private int _health = 100;
-        private int _wave = 1;
+        private int _wave = 3;
         private double _timer;
         private double _bulletTimer;
         private bool _bulletLock = false;
         private int _drawnAsteroids = 1;
         private List<AsteroidSprite> _asteroids = new List<AsteroidSprite>();
-        
+
         //Needs Random placement of asteroids. Array
         //private AsteroidSprite _asteroid;
         private Vector2 _playerPosition = new Vector2(50, 100);
@@ -41,7 +41,7 @@ namespace game_project_0.Screens
         private float _pauseAlpha;
         private readonly InputAction _pauseAction;
 
-        public GameplayScreen()
+        public GameplayScreen3()
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
@@ -57,7 +57,7 @@ namespace game_project_0.Screens
             base.Activate();
             _explosion = new ExplosionParticleSystem(this, 20);
             Components.Add(_explosion);
-            if(_content == null)
+            if (_content == null)
             {
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
@@ -67,7 +67,7 @@ namespace game_project_0.Screens
             _backgroundTexture = _content.Load<Texture2D>("space");
             _ship = new ShipSprite();
             _ship.Direction = Direction.Right;
-            for(int i = 0; i < ASTEROID_COUNT; i++)
+            for (int i = 0; i < ASTEROID_COUNT; i++)
             {
                 var a = new AsteroidSprite();
                 a.Position = new Vector2(770, _random.Next(100, 400));
@@ -109,21 +109,21 @@ namespace game_project_0.Screens
                 {
                     _bulletTimer += gameTime.ElapsedGameTime.TotalSeconds;
                 }
-                
+
                 if (_bulletTimer > 0.7)
                 {
                     _bulletLock = false;
                     _bulletTimer -= 0.7;
                 }
-                
+
                 _ship.Update(gameTime);
-                if(_timer > 1.1 && _drawnAsteroids < ASTEROID_COUNT)
+                if (_timer > 0.7 && _drawnAsteroids < ASTEROID_COUNT)
                 {
                     _drawnAsteroids++;
-                    _timer -= 1.1;
+                    _timer -= 0.7;
                 }
-                
-                if(_health <= 0)
+
+                if (_health <= 0)
                 {
                     //END GAME LOST
                     _health = 0;
@@ -134,14 +134,14 @@ namespace game_project_0.Screens
                 {
                     //END GAME WIN
 
-                    ScreenManager.AddScreen(new GameplayScreen2(), ControllingPlayer);
-                    
+                    ScreenManager.AddScreen(new WinnerScreen(), ControllingPlayer);
+
 
                 }
                 for (int i = 0; i < _drawnAsteroids; i++)
                 {
                     _asteroids[i].Update(gameTime);
-                    
+
                     if (_asteroids[i].Destroyed == false && _ship.Bullet.Bounds.CollidesWith(_asteroids[i].Bounds) && _ship.Bullet.Fired)
                     {
                         _explosionSound.Play();
@@ -155,7 +155,7 @@ namespace game_project_0.Screens
 
                     }
 
-                    if(_asteroids[i].Destroyed == false && _asteroids[i].Bounds.CollidesWith(_ship.Bounds))
+                    if (_asteroids[i].Destroyed == false && _asteroids[i].Bounds.CollidesWith(_ship.Bounds))
                     {
                         _explosionSound.Play();
                         _asteroids[i].Destroyed = true;
@@ -163,16 +163,16 @@ namespace game_project_0.Screens
                         _health -= 20;
                     }
 
-                    if(!_asteroids[i].Destroyed && _asteroids[i].Position.X <= -30)
+                    if (!_asteroids[i].Destroyed && _asteroids[i].Position.X <= -30)
                     {
                         _asteroids[i].Destroyed = true;
                         _asteroids[i].ExplosionPosition = _asteroids[i].Position;
                         _health -= 10;
                     }
                 }
-                
+
                 _ship.Bullet.Update(gameTime);
-                
+
 
             }
         }
@@ -191,7 +191,7 @@ namespace game_project_0.Screens
 
             PlayerIndex player;
 
-            if(_pauseAction.Occurred(input, ControllingPlayer, out player) || gamePadDisconnected)
+            if (_pauseAction.Occurred(input, ControllingPlayer, out player) || gamePadDisconnected)
             {
                 ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
             }
@@ -213,18 +213,18 @@ namespace game_project_0.Screens
                     _ship.Bullet.Fired = true;
                     _ship.Bullet.Hit = false;
                     _ship.Bullet.Direction = Direction.Right;
-                   
+
                 }
-                
+
                 if (movement.Length() > 1)
                     movement.Normalize();
 
                 _playerPosition += movement * 5f;
 
                 int top = 480 - _ship.Height;
-                
+
                 if (_playerPosition.Y > top)
-                  _playerPosition.Y = top;
+                    _playerPosition.Y = top;
                 if (_playerPosition.Y < _ship.Height)
                     _playerPosition.Y = _ship.Height;
 
@@ -233,17 +233,17 @@ namespace game_project_0.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            
+
             var viewport = ScreenManager.GraphicsDevice.Viewport;
             var fullscreen = new Rectangle(0, 0, viewport.Width, viewport.Height);
             var wavestring = "Wave " + _wave;
             var healthstring = "Health: " + _health;
             var healthColor = Color.Green;
-            if(_health <= 60 && _health >= 40)
+            if (_health <= 60 && _health >= 40)
             {
                 healthColor = Color.Yellow;
             }
-            if(_health <= 30 &&  _health >= 0)
+            if (_health <= 30 && _health >= 0)
             {
                 healthColor = Color.Red;
             }
@@ -255,15 +255,15 @@ namespace game_project_0.Screens
             spriteBatch.DrawString(_gameFont, wavestring, new Vector2(700, 0), Color.White);
             _ship.Position = _playerPosition;
             _ship.Draw(gameTime, spriteBatch);
-            
-            for(int i = 0; i < _drawnAsteroids; i++)
+
+            for (int i = 0; i < _drawnAsteroids; i++)
             {
                 _asteroids[i].Draw(gameTime, spriteBatch);
             }
-                
+
             spriteBatch.End();
 
-            if(TransitionPosition > 0 || _pauseAlpha > 0)
+            if (TransitionPosition > 0 || _pauseAlpha > 0)
             {
                 float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, _pauseAlpha / 2);
                 ScreenManager.FadeBackBufferToBlack(alpha);
